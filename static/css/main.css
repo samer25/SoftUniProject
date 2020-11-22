@@ -1,0 +1,12 @@
+* {
+    color: #000300;
+}
+
+.root {
+    margin-top: 100px;
+}
+
+.content {
+    margin: auto;
+    text-align: center;
+}

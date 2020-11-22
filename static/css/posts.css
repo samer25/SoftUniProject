@@ -1,0 +1,136 @@
+
+.middle {
+    width: 50%;
+    margin: auto;
+
+}
+
+.top-post, .bottom-post {
+    width: 100%;
+    min-height: 60px;
+    /*background-color: #94fbab;*/
+}
+
+.bottom-post{
+    margin-top: 10px;
+}
+
+.posts {
+    margin-top: 50px;
+    background-color: ghostwhite;
+}
+
+.like-level1, .like-level2, .dislike-level1, .dislike-level2, .share, .comment {
+    font-size: 4vh;
+    margin-left: 2%;
+    cursor: pointer;
+    float: left;
+
+
+}
+
+.bottom-post .share, .count-likes {
+    float: right;
+    margin-right: 3%;
+    cursor: pointer;
+}
+
+
+.count-likes {
+    font-size: 1.2vw;
+    margin-top: 1%
+
+}
+
+.top-post h4 {
+    margin-left: 60px;
+    margin-top: 4px;
+}
+
+/*.info-ifFollow {*/
+/*    display: none;*/
+/*    transition: 1.4s;*/
+/*    margin-left: 30px;*/
+/*}*/
+
+
+/*.info-ifFollow-active {*/
+/*    display: block;*/
+/*    transition: 1.4s;*/
+/*}*/
+
+.post-menu {
+    float: right;
+    font-size: 2vw;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+.top-post .profile-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border-style: solid;
+    /* margin-bottom: -137px; */
+    float: left;
+    cursor: pointer;
+}
+
+#more {
+    display: none;
+}
+
+.time-posted {
+    width: 10%;
+    margin: auto;
+}
+
+.posted-text {
+    margin-left: 5px;
+    margin-top: 5px;
+    max-width: 100%;
+
+}
+
+.post-img {
+    width: 100%;
+    text-align: center;
+    background-color: #000300;
+    margin-top: 1%;
+}
+
+.post-img img {
+    min-width: 55%;
+    max-width: 85%;
+
+}
+
+
+.extra_content {
+    display: none;
+    float: left;
+    margin-top: 10px;
+}
+
+.read_more {
+    display: block;
+    width: 50px;
+    margin-top: 30px;
+    background-color: #94fbab;
+    border: none;
+
+}
+
+.less {
+    float: left;
+    margin-top: 10px;
+}
+
+.user {
+    width: 52px;
+
+}
+
+.show {
+    background-color: black;
+}
