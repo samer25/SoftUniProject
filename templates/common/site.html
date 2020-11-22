@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/navbar.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/clear.css' %}">
+    <link rel="stylesheet" href={% static "fonts-icons/all.css" %}>
+    {% block style %} {% endblock %}
+
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+{% include 'common/navbar.html' %}
+{% block site_content %}
+
+{% endblock %}
+{% block script %}{% endblock %}
+<script src={% static "js/navbar.js" %}></script>
+</body>
+</html>

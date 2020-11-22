@@ -1,0 +1,30 @@
+{% extends 'common/site.html' %}
+{% block title %} Home Page {% endblock %}
+{% block site_content %}
+    <div class="root">
+        <div class="content">
+            {% if user.is_authenticated %}
+                <h1>Hello {{ user }}!</h1>
+                <img src="{{ user.profile.profile_pic.url }}" alt="profile picture">
+                <h1>Welcome to Laugh Center</h1>
+            {% else %}
+                <h1>Join Laugh Center</h1>
+            {% endif %}
+            <p>Have fun with others users while creating most funniest posts and comments.</p>
+            <h3>Have fun!</h3>
+            {% if user.is_authenticated %}
+                <div class="">
+                    <a href="{% url 'create post' %}">Create a post</a>
+                    <span>or</span>
+                    <a href="{% url 'posts' %}">Check all posts</a>
+                </div>
+            {% else %}
+                <div class="">
+                    <a href="{% url 'user register' %}">Register</a>
+                    <span>or</span>
+                    <a href="{% url 'login user' %}">Log in</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

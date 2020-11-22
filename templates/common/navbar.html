@@ -1,0 +1,44 @@
+<div class="fixed-navbar">
+    <nav>
+        <div class="logo">
+            <a><img class="logo-img" src="" alt="logo"></a>
+        </div>
+        <ul class="nav-links">
+
+            <li>
+                <img src="{{ user.profile.profile_pic }}" class="profile-img" alt="profile-img">
+                <h4 class="week-score-user"></h4>
+            </li>
+            <li>
+                <a href="{% url 'landing page' %}" class="fi-home"></a>
+            </li>
+            <li>
+                <a href="{% url 'create post' %}" class="fi-page-add"></a>
+            </li>
+
+            <li>
+                <a href="{% url 'posts' %}" class="fi-page-multiple"></a>
+
+            </li>
+            <li>
+                <a class="fi-widget"></a>
+            </li>
+            <li>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'logout user' %}" class="fi-arrow-right"></a>
+                {% else %}
+                    <a href="{% url 'login user' %}" class="fi-arrow-left"></a>
+                {% endif %}
+            </li>
+
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+        <!--  <div class="underline"></div>-->
+    </nav>
+    <div class="underline"></div>
+</div>
+<br>
