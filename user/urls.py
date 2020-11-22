@@ -1,7 +1,9 @@
 from django.urls import path
-from user.views import register_user, home_page
+from user.views import register_user, home_page, login_user, logout_user
 
 urlpatterns = [
     path('register/', register_user, name='user register'),
     path('', home_page, name='home page'),
+    path('login/', login_user, name='login user'),
+    path('logout/', logout_user, name='logout user')
 ]

@@ -15,3 +15,9 @@ class ProfileUserForm(forms.ModelForm):
     class Meta:
         model = ProfileUser
         exclude = ['user']
+
+
+class LoginUserForm(forms.Form):
+    username = forms.CharField(max_length=10)
+    password = forms.CharField(max_length=10, widget=forms.PasswordInput)
+

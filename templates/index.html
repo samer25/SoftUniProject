@@ -5,7 +5,10 @@
     <title>Title</title>
 </head>
 <body>
-<h1>hello {{ user }}</h1>
 
+{% if user.is_authenticated %}
+    <h1>hello {{ user }}</h1>
+{% endif %}
+<a href="{% url 'logout user' %}">logout</a>
 </body>
 </html>

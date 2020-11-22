@@ -1,9 +1,10 @@
+from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, logout
+from django.contrib.auth import login, logout, authenticate
 
 # Create your views here.
-from user.forms import RegisterUserForm, ProfileUserForm
+from user.forms import RegisterUserForm, ProfileUserForm, LoginUserForm
 
 
 @transaction.atomic
@@ -24,6 +25,29 @@ def register_user(request):
             return redirect('home page')
 
         return render(request, 'register.html', {'form': user_form, 'profile_form': profile_form, })
+
+
+def login_user(request):
+    if request.method == 'GET':
+        login_form = LoginUserForm()
+        return render(request, 'login.html', {'form': login_form})
+    else:
+        login_form = LoginUserForm(request.POST)
+        if login_form.is_valid():
+            username = login_form.cleaned_data['username']
+            password = login_form.cleaned_data['password']
+            user = authenticate(username=username, password=password)
+            if user:
+                login(request, user)
+                return redirect('home page')
+            return redirect('home page')
+        return render(request, 'login.html', {'form': login_form})
+
+
+@login_required
+def logout_user(request):
+    logout(request)
+    return redirect('home page')
 
 
 def home_page(request):

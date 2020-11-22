@@ -5,6 +5,11 @@
     <title>Title</title>
 </head>
 <body>
-
+<h1>Login</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form }}
+    <button>Login</button>
+</form>
 </body>
 </html>
