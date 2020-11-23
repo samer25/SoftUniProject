@@ -9,8 +9,6 @@ function changeClass(id) {
         less.style.display = 'block';
         btn.innerHTML = '<i class="fi-arrow-down"></i> ';
     } else {
-
-
         content.style.display = "block";
         content.style.backgroundColor = "#ffffff";
         less.style.display = 'none';

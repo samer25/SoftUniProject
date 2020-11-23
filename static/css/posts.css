@@ -20,7 +20,7 @@
     background-color: ghostwhite;
 }
 
-.like-level1, .like-level2, .dislike-level1, .dislike-level2, .share, .comment {
+.like-level1, .dislike-level1, .share, .comment {
     font-size: 4vh;
     margin-left: 2%;
     cursor: pointer;

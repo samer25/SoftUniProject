@@ -1,0 +1,38 @@
+form {
+    width: 40%;
+    margin: auto;
+    display: grid;
+}
+
+label, .button {
+    margin-top: 20px;
+    padding: 5px;
+
+}
+
+h1 {
+    text-align: center;
+    margin-left: 400px;
+    margin-right: 400px;
+
+}
+
+.forms {
+    background-color: #94fbab;
+    width: 50%;
+    margin: -70px auto 50px auto;
+    border-radius: 50px;
+    padding: 60px;
+}
+
+h2 {
+    text-align: center;
+}
+
+.form-control {
+    height: 25px;
+}
+
+.textarea {
+    padding: 25px;
+}

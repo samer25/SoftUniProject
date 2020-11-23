@@ -4,11 +4,11 @@
             <a><img class="logo-img" src="" alt="logo"></a>
         </div>
         <ul class="nav-links">
-
-            <li>
-                <img src="{{ user.profile.profile_pic.url }}" class="profile-img" alt="profile-img">
-                <h4 class="week-score-user"></h4>
-            </li>
+            {% if user.is_superuser %}
+                <li>
+                    <img src="{{ user.profile.profile_pic.url }}" class="profile-img" alt="profile-img">
+                </li>
+            {% endif %}
             <li>
                 <a href="{% url 'landing page' %}" class="fi-home"></a>
             </li>
