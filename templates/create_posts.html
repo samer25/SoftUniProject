@@ -1,10 +1,15 @@
 {% extends 'common/site.html' %}
+{% load static %}
 {% block title %} Create a post {% endblock %}
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/forms.css' %}">{% endblock %}
 
 <br>
 {% block site_content %}
     <div class="root">
-        <div class="content">
+        <div class="content"><h1>Post some content!</h1></div>
+        <div class="forms">
+            <h2>Post now!</h2>
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form }}

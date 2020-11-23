@@ -10,8 +10,13 @@
             {% else %}
                 <h1>Join Laugh Center</h1>
             {% endif %}
+            <br>
             <p>Have fun with others users while creating most funniest posts and comments.</p>
+            <br>
+
             <h3>Have fun!</h3>
+            <br>
+
             {% if user.is_authenticated %}
                 <div class="">
                     <a href="{% url 'create post' user.id %}">Create a post</a>

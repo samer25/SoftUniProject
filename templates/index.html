@@ -6,6 +6,8 @@
 {% block site_content %}
     <div class="root">
         <div class="content">
+            <h1>Welcome to Laugh Center!</h1>
+
             <div class="column middle">
                 {% for p in posts %}
                     <div class="posts">
@@ -23,7 +25,8 @@
                                 <h5 class="user">{{ p.created_by.username }}:</h5>
                                 <p class="less-{{ p.id }} less"> {{ p.description|safe|truncatewords:5 }} </p>
                                 <p class="extra_content-{{ p.id }} extra_content">{{ p.description }}</p>
-                                <button onclick="changeClass('{{ p.id }}')" class="read_more-{{ p.id }} read_more button"><i class="fi-arrow-down"></i>
+                                <button onclick="changeClass('{{ p.id }}')"
+                                        class="read_more-{{ p.id }} read_more button"><i class="fi-arrow-down"></i>
                                 </button>
                             </div>
                         </div>

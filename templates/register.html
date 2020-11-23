@@ -1,15 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form }}
-        {{ profile_form }}
-        <button type="submit">Register</button>
-    </form>
-</body>
-</html>
+{% extends 'common/site.html' %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/forms.css' %}">
+{% endblock %}
+{% block title %} Register {% endblock %}
+{% block site_content %}
+    <div class="root">
+        <div class="content">
+            <h1>Laugh Center is your best source for fun. Share anything you find funny, get comments from people all
+                over
+                the world.</h1>
+        </div>
+        <div class="forms">
+            <h2>Join us Now!</h2>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {#                {{ form.errors }}#}
+                {{ profile_form.errors }}
+                {{ form }}
+                {{ profile_form }}
+                <button class="button" type="submit">Register</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
