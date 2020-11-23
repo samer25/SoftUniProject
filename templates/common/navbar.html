@@ -6,23 +6,31 @@
         <ul class="nav-links">
 
             <li>
-                <img src="{{ user.profile.profile_pic }}" class="profile-img" alt="profile-img">
+                <img src="{{ user.profile.profile_pic.url }}" class="profile-img" alt="profile-img">
                 <h4 class="week-score-user"></h4>
             </li>
             <li>
                 <a href="{% url 'landing page' %}" class="fi-home"></a>
             </li>
-            <li>
-                <a href="{% url 'create post' %}" class="fi-page-add"></a>
-            </li>
+            {% if user.is_authenticated %}
+                <li>
 
+                    <a href="{% url 'create post' user.id %}" class="fi-page-add"></a>
+
+                </li>
+            {% endif %}
             <li>
                 <a href="{% url 'posts' %}" class="fi-page-multiple"></a>
 
             </li>
-            <li>
-                <a class="fi-widget"></a>
-            </li>
+            {% if user.is_superuser %}
+                <li>
+
+                    <a class="fi-widget"></a>
+
+                </li>
+            {% endif %}
+
             <li>
                 {% if user.is_authenticated %}
                     <a href="{% url 'logout user' %}" class="fi-arrow-right"></a>

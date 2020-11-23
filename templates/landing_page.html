@@ -14,7 +14,7 @@
             <h3>Have fun!</h3>
             {% if user.is_authenticated %}
                 <div class="">
-                    <a href="{% url 'create post' %}">Create a post</a>
+                    <a href="{% url 'create post' user.id %}">Create a post</a>
                     <span>or</span>
                     <a href="{% url 'posts' %}">Check all posts</a>
                 </div>
