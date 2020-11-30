@@ -4,7 +4,7 @@
     <div class="root">
         <div class="content">
             {% if user.is_authenticated %}
-                <h1>Hello {{ user }}!</h1>
+                <h1>Hello {{ user.profile.first_name }} {{ user.profile.last_name }}!</h1>
                 <img src="{{ user.profile.profile_pic.url }}" alt="profile picture">
                 <h1>Welcome to Laugh Center</h1>
             {% else %}
@@ -16,12 +16,11 @@
 
             <h3>Have fun!</h3>
             <br>
-
             {% if user.is_authenticated %}
                 <div class="">
-                    <a href="{% url 'create post' user.id %}">Create a post</a>
+                    <a class="button-success" href="{% url 'create post' user.id %}">Create a post</a>
                     <span>or</span>
-                    <a href="{% url 'posts' %}">Check all posts</a>
+                    <a class="button-success" href="{% url 'posts' %}">Check all posts</a>
                 </div>
             {% else %}
                 <div class="">

@@ -11,8 +11,12 @@
             <h2>Log in:</h2>
             <form method="post">
                 {% csrf_token %}
+                <br>
+                {{ error }}
+                {{ form.errors }}
                 {{ form }}
-                <button class="button">Login</button>
+
+                <button class="button-success button">Login</button>
             </form>
         </div>
     </div>
