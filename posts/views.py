@@ -2,19 +2,24 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, CreateView
 
 from posts.forms import PostForm
 from posts.models import Post
 from user.models import ProfileUser
 
 
-def creating_post(request, pk):
-    user = User.objects.get(pk=pk)
-    if request.method == 'GET':
+class CreatePost(CreateView):
+    """User Creating posts view"""
+
+    # get method viewing forms for creating posts
+    def get(self, request, *args, **kwargs):
         form = PostForm()
         return render(request, 'create_posts.html', {'form': form})
-    else:
+
+    # post method verified forms fields if they valid if they are save it
+    def post(self, request, *args, **kwargs):
+        user = User.objects.get(pk=kwargs['pk'])
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             forms = form.save(commit=False)
@@ -22,6 +27,21 @@ def creating_post(request, pk):
             forms.save()
             return redirect('posts')
         return render(request, 'create_posts.html', {'form': form})
+
+
+# def creating_post(request, pk):
+#     user = User.objects.get(pk=pk)
+#     if request.method == 'GET':
+#         form = PostForm()
+#         return render(request, 'create_posts.html', {'form': form})
+#     else:
+#         form = PostForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             forms = form.save(commit=False)
+#             forms.created_by = user
+#             forms.save()
+#             return redirect('posts')
+#         return render(request, 'create_posts.html', {'form': form})
 
 
 # def posts(request):
@@ -33,6 +53,7 @@ def creating_post(request, pk):
 
 
 class PostsView(ListView):
+    """viewing all posts from users"""
     model = Post
     context_object_name = 'posts'
     template_name = 'index.html'
