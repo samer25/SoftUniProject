@@ -4,7 +4,8 @@ from django.contrib.auth.models import User
 from django.db import transaction
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
-from django.views.generic import DetailView
+from django.urls import reverse_lazy, reverse
+from django.views.generic import DetailView, UpdateView, FormView
 
 from posts.models import Post
 from user.forms import RegisterUserForm, ProfileUserForm, LoginUserForm
@@ -70,3 +71,24 @@ class ProfileView(DetailView):
     def get_context_data(self, **kwargs):
         post = Post.objects.filter(created_by=self.kwargs['pk'])
         return {'posts': post, 'pk': self.kwargs['pk']}
+
+
+def edit_profile(request, pk):
+    user = User.objects.get(pk=pk)
+    profile = ProfileUser.objects.get(pk=user.profile.id)
+    if request.method == 'GET':
+        form = ProfileUserForm(instance=profile)
+        return render(request, 'edit_profile.html', {'form': form})
+    else:
+        form = ProfileUserForm(request.POST, request.FILES, instance=profile)
+        form.save()
+        return redirect('profile', pk)
+
+
+def delete_profile(request, pk):
+    user = User.objects.get(pk=pk)
+    if request.method == 'GET':
+        return render(request, 'delete_profile.html')
+    else:
+        user.delete()
+        return redirect('landing page')

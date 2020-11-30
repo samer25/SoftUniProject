@@ -23,6 +23,7 @@ class ProfileUserForm(forms.ModelForm):
         super(ProfileUserForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
+        self.fields['bio'].widget.attrs = {'class': 'textarea', }
 
     class Meta:
         model = ProfileUser
