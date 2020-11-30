@@ -41,6 +41,11 @@ h2 {
     background-color: white;
 }
 
+#profile_pic-clear_id {
+    margin-top: 10px;
+
+}
+
 #id_profile_pic, #id_img_post {
     padding: 10px;
 }

@@ -27,8 +27,8 @@
                 <p class="bio">{{ user.profile.bio }}</p>
 
                 {% if user.id == pk %}
-                    <button class="button-success">Edit</button>
-                    <button class="button-error">Delete</button>
+                    <button class="button-success"><a href="{% url 'edit profile' pk%}"> Edit</a></button>
+                    <button class="button-error"><a href="{% url 'delete profile' pk%}"> Delete</a></button>
                 {% endif %}
             </div>
             <div class="underline"></div>
