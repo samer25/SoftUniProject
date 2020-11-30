@@ -24,15 +24,24 @@
 }
 
 .button-success:hover, .button-error:hover {
-    /*opacity: 0.5;*/
-    background-color: #ff0a3f;
+    opacity: 0.5;
 }
 
 
 .button-error {
-    background: rgb(202, 60, 60);
+    background-color: #ff0a3f;
     /* this is a maroon */
 }
 
+.profile-pic {
+    width: 300px;
+    padding: 20px;
+}
 
+.bio {
+    padding: 20px;
+}
 
+.middle {
+    padding: 20px;
+}

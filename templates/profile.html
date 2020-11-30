@@ -1,7 +1,12 @@
 {% extends 'common/site.html' %}
 {% load static %}
 {% block style %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/posts.css' %}">{% endblock %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/posts.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
+
+{% endblock %}
+
+
 {% block title %}Profile{% endblock %}
 {% block site_content %}
     <div class="root">
@@ -10,21 +15,37 @@
                 {% for created in posts|slice:":1" %}
                     <h1>{{ created.created_by.profile.first_name }} {{ created.created_by.profile.last_name }}</h1>
                 {% endfor %}
-                <img src="{{ user.profile.profile_pic.url }}" alt="profile image">
+                {% for created in posts|slice:":1" %}
+                    {% if created.created_by.profile.profile_pic %}
+                        <img class="profile-pic" src="{{ created.created_by.profile.profile_pic.url }}"
+                             alt="profile image">
+                    {% endif %}
+                {% endfor %}
                 <br>
+                <h3>Bio:</h3>
+
+                <p class="bio">{{ user.profile.bio }}</p>
 
                 {% if user.id == pk %}
                     <button class="button-success">Edit</button>
                     <button class="button-error">Delete</button>
                 {% endif %}
             </div>
+            <div class="underline"></div>
             <div class="user_posts">
 
                 <div class="column middle">
                     {% if user.id == pk %}
                         <h2>My Posts:</h2>
                     {% else %}
-                        <h2>Welcome to posts:</h2>
+                        {% for created in posts|slice:'1' %}
+                            <h2>Welcome
+                                <br>
+                                to
+                                <br>
+                                {{ created.created_by.profile.first_name }} {{ created.created_by.profile.last_name }}
+                                posts:</h2>
+                        {% endfor %}
                     {% endif %}
                     {% for post in posts %}
                         <div class="posts">

@@ -5,7 +5,7 @@
         <div class="content">
             {% if user.is_authenticated %}
                 <h1>Hello {{ user.profile.first_name }} {{ user.profile.last_name }}!</h1>
-                <img src="{{ user.profile.profile_pic.url }}" alt="profile picture">
+                <img class="profile-pic" src="{{ user.profile.profile_pic.url }}" alt="profile picture">
                 <h1>Welcome to Laugh Center</h1>
             {% else %}
                 <h1>Join Laugh Center</h1>
