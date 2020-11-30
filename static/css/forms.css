@@ -10,6 +10,11 @@ label, .button {
 
 }
 
+.button {
+    width: 10vh;
+
+}
+
 h1 {
     text-align: center;
     margin-left: 400px;
@@ -31,8 +36,17 @@ h2 {
 
 .form-control {
     height: 25px;
+    border-radius: 5px;
+    border-color: #ff0a3f;
+    background-color: white;
+}
+
+#id_profile_pic, #id_img_post {
+    padding: 10px;
 }
 
 .textarea {
     padding: 25px;
+    border-radius: 5px;
+    border-color: #ff0a3f;
 }

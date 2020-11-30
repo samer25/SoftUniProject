@@ -10,3 +10,38 @@
     margin: 125px auto;
     text-align: center;
 }
+
+.button-success,
+.button-error {
+    color: #000300;
+    border-radius: 4px;
+    padding: 10px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.button-success {
+    background-color: #94fbab
+}
+
+.button-success:hover, .button-error:hover {
+    opacity: 0.5;
+}
+
+
+.button-error {
+    background-color: #ff0a3f;
+    /* this is a maroon */
+}
+
+.profile-pic {
+    width: 300px;
+    padding: 20px;
+}
+
+.bio {
+    padding: 20px;
+}
+
+.middle {
+    padding: 20px;
+}

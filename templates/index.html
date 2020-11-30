@@ -9,6 +9,7 @@
             <h1>Welcome to Laugh Center!</h1>
 
             <div class="column middle">
+
                 {% for p in posts %}
                     <div class="posts">
                         <div class="top-post">
@@ -19,9 +20,14 @@
                             <div class="posted-text">
 
                                 <h5 class="time-posted">{{ p.date }}</h5>
+                                {% if user.is_authenticated %}
+                                    <a href="{% url 'profile' p.created_by.pk%}">
+                                {% else %}
+                                    <a href="{% url 'user register' %}">
+                                {% endif %}
                                 <img src="{{ p.created_by.profile.profile_pic.url }}" class="profile-img"
                                      alt="profile-img">
-
+                                </a>
                                 <h5 class="user">{{ p.created_by.username }}:</h5>
                                 <p class="less-{{ p.id }} less"> {{ p.description|safe|truncatewords:5 }} </p>
                                 <p class="extra_content-{{ p.id }} extra_content">{{ p.description }}</p>
@@ -48,5 +54,6 @@
         </div>
     </div>
     {% block script %}
-        <script src="{% static 'js/posts.js' %}"></script>  {% endblock %}
+        <script src="{% static 'js/posts.js' %}"></script>
+    {% endblock %}
 {% endblock %}

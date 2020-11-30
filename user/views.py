@@ -1,12 +1,16 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db import transaction
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
+from django.views.generic import DetailView
 
-# Create your views here.
+from posts.models import Post
 from user.forms import RegisterUserForm, ProfileUserForm, LoginUserForm
 from user.models import ProfileUser
+
+"""Functions views"""
 
 
 @transaction.atomic
@@ -42,7 +46,9 @@ def login_user(request):
             if user:
                 login(request, user)
                 return redirect('landing page')
-            return redirect('landing page')
+            else:
+                error = 'user or password is not valid!'
+                return render(request, 'login.html', {'form': login_form, 'error': error})
         return render(request, 'login.html', {'form': login_form})
 
 
@@ -52,3 +58,15 @@ def logout_user(request):
     return redirect('landing page')
 
 
+# def profile_user(request, pk):
+#     post = Post.objects.filter(created_by=pk)
+#     return render(request, 'profile.html', {'posts': post, 'pk': pk})
+
+class ProfileView(DetailView):
+    model = User
+    context_object_name = 'user'
+    template_name = 'profile.html'
+
+    def get_context_data(self, **kwargs):
+        post = Post.objects.filter(created_by=self.kwargs['pk'])
+        return {'posts': post, 'pk': self.kwargs['pk']}

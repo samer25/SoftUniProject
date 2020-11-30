@@ -1,12 +1,14 @@
 <div class="fixed-navbar">
     <nav>
         <div class="logo">
-            <a><img class="logo-img" src="" alt="logo"></a>
+            <a href="{% url 'landing page' %}"><img style="display: none" class="logo-img" src="" alt="logo">Laugh
+                Center</a>
         </div>
         <ul class="nav-links">
-            {% if user.is_superuser %}
+            {% if not user.is_superuser and user.is_authenticated %}
                 <li>
-                    <img src="{{ user.profile.profile_pic.url }}" class="profile-img" alt="profile-img">
+                    <a href="{% url 'profile' user.id %}"> <img src="{{ user.profile.profile_pic.url }}"
+                                                                class="profile-img" alt="profile-img"></a>
                 </li>
             {% endif %}
             <li>
