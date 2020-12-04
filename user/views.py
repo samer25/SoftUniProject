@@ -114,15 +114,12 @@ def logout_user(request):
 #     return render(request, 'profile.html', {'posts': post, 'pk': pk})
 
 class ProfileView(DetailView):
-    """Viewing Profile of the user """
-    model = User
-    context_object_name = 'user'
-    template_name = 'profile.html'
+    """Viewing Profile of the user and his posts"""
 
-    # adding context post form model post to view it in profile user
-    def get_context_data(self, **kwargs):
+    def get(self, request, *args, **kwargs):
+        user = User.objects.get(pk=kwargs['pk'])
         post = Post.objects.filter(created_by=self.kwargs['pk'])
-        return {'posts': post, 'pk': self.kwargs['pk']}
+        return render(request, 'profile.html', {'posts': post, 'pk': self.kwargs['pk'], 'user': user})
 
 
 class EditProfile(UpdateView):
@@ -133,7 +130,7 @@ class EditProfile(UpdateView):
         user = User.objects.get(pk=kwargs['pk'])
         profile = ProfileUser.objects.get(pk=user.profile.pk)
         form = ProfileUserForm(instance=profile)
-        return render(request, 'edit_profile.html', {'form': form})
+        return render(request, 'common/edit.html', {'form': form})
 
     # post method to verified edited profile form field and save it
     def post(self, request, *args, **kwargs):
@@ -150,7 +147,7 @@ class EditProfile(UpdateView):
 #     profile = ProfileUser.objects.get(pk=user.profile.id)
 #     if request.method == 'GET':
 #         form = ProfileUserForm(instance=profile)
-#         return render(request, 'edit_profile.html', {'form': form})
+#         return render(request, 'edit.html', {'form': form})
 #     else:
 #         form = ProfileUserForm(request.POST, request.FILES, instance=profile)
 #         form.save()
