@@ -66,6 +66,13 @@ class PostEdit(UpdateView):
         form = PostForm(instance=posts)
         return render(request, 'common/edit.html', {'form': form})
 
+    def post(self, request, *args, **kwargs):
+        post = Post.objects.get(pk=kwargs['pk'])
+        form = PostForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect('posts')
+
 
 class PostDelete(DeleteView):
     def get(self, request, *args, **kwargs):
@@ -75,4 +82,3 @@ class PostDelete(DeleteView):
         post = Post.objects.get(pk=kwargs['pk'])
         post.delete()
         return redirect('posts')
-
