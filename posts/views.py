@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from django.views.generic import DetailView, ListView, CreateView
+from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
 
 from posts.forms import PostForm
 from posts.models import Post
@@ -57,3 +57,22 @@ class PostsView(ListView):
     model = Post
     context_object_name = 'posts'
     template_name = 'index.html'
+    ordering = ['-date']
+
+
+class PostEdit(UpdateView):
+    def get(self, request, *args, **kwargs):
+        posts = Post.objects.get(pk=kwargs['pk'])
+        form = PostForm(instance=posts)
+        return render(request, 'common/edit.html', {'form': form})
+
+
+class PostDelete(DeleteView):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'post_delete.html')
+
+    def post(self, request, *args, **kwargs):
+        post = Post.objects.get(pk=kwargs['pk'])
+        post.delete()
+        return redirect('posts')
+

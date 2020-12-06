@@ -12,13 +12,11 @@
     <div class="root">
         <div class="content">
             <div class="profile">
-                {% for created in posts|slice:":1" %}
-                    <h1>{{ created.created_by.profile.first_name }} {{ created.created_by.profile.last_name }}</h1>
-                {% endfor %}
-                {% for created in posts|slice:":1" %}
-                    <img class="profile-pic" src="{{ created.created_by.profile.profile_pic.url }}"
-                         alt="profile image">
-                {% endfor %}
+
+                <h1>{{ user.profile.first_name }} {{ user.profile.last_name }}</h1>
+
+                <img class="profile-pic" src="{{ user.profile.profile_pic.url }}"
+                     alt="profile image">
                 <br>
                 <h3>Bio:</h3>
 
@@ -48,9 +46,6 @@
                     {% for post in posts %}
                         <div class="posts">
                             <div class="top-post">
-                                <div class="post-menu">
-                                    <i class="fi-list-bullet"></i>
-                                </div>
 
                                 <div class="posted-text">
 
@@ -74,7 +69,14 @@
                                 <a href="" class="fi-like like-level1"></a>
                                 <i class="fi-dislike dislike-level1"></i>
                                 <i class="fi-comment-quotes comment"></i>
-                                <i class="fi-share share"></i>
+                                {#                                <i class="fi-share share"></i>#}
+
+                                {% if user.id == pk %}
+                                    <button class="button-success"><a href="{% url 'post edit' post.pk %}"> Edit</a>
+                                    </button>
+                                    <button class="button-error"><a href="{% url 'post delete' post.pk %}"> Delete</a>
+                                    </button>
+                                {% endif %}
                                 <i class="count-likes">Likes: 0</i>
                             </div>
                             <div class="underline"></div>

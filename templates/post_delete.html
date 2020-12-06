@@ -1,0 +1,23 @@
+{% extends 'common/site.html' %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/forms.css' %}">
+{% endblock %}
+{% block title %} Delete Post {% endblock %}
+{% block site_content %}
+    <div class="root">
+        <h1>Delete your Post</h1>
+        <div class="content">
+            <div class="forms">
+                <h2>Delete:</h2>
+                <br>
+                <h3>Are you sure you want to delete your Post?</h3>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <br>
+                    <button style="margin: auto" class="button button-error">Delete!</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

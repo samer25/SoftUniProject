@@ -14,14 +14,13 @@
                     <div class="posts">
                         <div class="top-post">
                             <div class="post-menu">
-                                <i class="fi-list-bullet"></i>
                             </div>
 
                             <div class="posted-text">
 
                                 <h5 class="time-posted">{{ p.date }}</h5>
                                 {% if user.is_authenticated %}
-                                    <a href="{% url 'profile' p.created_by.pk%}">
+                                    <a href="{% url 'profile' p.created_by.pk %}">
                                 {% else %}
                                     <a href="{% url 'user register' %}">
                                 {% endif %}
@@ -43,7 +42,13 @@
                             <a href="" class="fi-like like-level1"></a>
                             <i class="fi-dislike dislike-level1"></i>
                             <i class="fi-comment-quotes comment"></i>
-                            <i class="fi-share share"></i>
+                            {#                            <i class="fi-share share"></i>#}
+                            {% if user.id == p.created_by.pk %}
+                                <button class="button-success"><a href="{% url 'post edit' p.pk %}"> Edit</a>
+                                </button>
+                                <button class="button-error"><a href="{% url 'post delete' p.pk %}"> Delete</a>
+                                </button>
+                            {% endif %}
                             <i class="count-likes">Likes: 0</i>
                         </div>
                         <div class="underline"></div>
