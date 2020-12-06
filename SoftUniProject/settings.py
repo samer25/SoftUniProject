@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'SoftUniProject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'myProject',
+        'NAME': 'softuni_project',
         'USER': 'postgres',
         'PASSWORD': '12345',
         'HOST': 'localhost',
