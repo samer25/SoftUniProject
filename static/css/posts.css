@@ -107,6 +107,9 @@
 
 }
 
+.d {
+    width: 10px;
+}
 
 .extra_content {
     display: none;

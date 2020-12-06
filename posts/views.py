@@ -51,13 +51,29 @@ class CreatePost(CreateView):
 # profile = ProfileUser.objects.get()
 # return render(request, 'index.html', {'posts': post, 'profile': profile})
 
+def like_post(request, pk):
+    post = Post.objects.get(pk=pk)
+    user = User.objects.get(pk=post.created_by.id)
+    post.likes.add(user)
+    post.save()
+
+    return redirect('posts')
+
+
+def dislike_post(request, pk):
+    post = Post.objects.get(pk=pk)
+    user = User.objects.get(pk=post.created_by.id)
+    post.likes.remove(user)
+    post.save()
+    return redirect('posts')
+
 
 class PostsView(ListView):
     """viewing all posts from users"""
     model = Post
     context_object_name = 'posts'
     template_name = 'index.html'
-    ordering = ['-date']
+    ordering = ['-title']
 
 
 class PostEdit(UpdateView):

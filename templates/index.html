@@ -28,7 +28,10 @@
                                      alt="profile-img">
                                 </a>
                                 <h5 class="user">{{ p.created_by.username }}:</h5>
+                                <p class="title"> {{ p.title }} </p>
+                                <h5 class="d">Description:</h5>
                                 <p class="less-{{ p.id }} less"> {{ p.description|safe|truncatewords:5 }} </p>
+
                                 <p class="extra_content-{{ p.id }} extra_content">{{ p.description }}</p>
                                 <button onclick="changeClass('{{ p.id }}')"
                                         class="read_more-{{ p.id }} read_more button"><i class="fi-arrow-down"></i>
@@ -39,8 +42,8 @@
                             <img src="{{ p.img_post.url }}" alt="post img">
                         </div>
                         <div class="bottom-post">
-                            <a href="" class="fi-like like-level1"></a>
-                            <i class="fi-dislike dislike-level1"></i>
+                            <a href="{% url 'like post' p.id %}" class="fi-like like-level1"></a>
+                            <a href="{% url 'dislike post' p.id %}" class="fi-dislike dislike-level1"></a>
                             <i class="fi-comment-quotes comment"></i>
                             {#                            <i class="fi-share share"></i>#}
                             {% if user.id == p.created_by.pk %}
@@ -49,7 +52,7 @@
                                 <button class="button-error"><a href="{% url 'post delete' p.pk %}"> Delete</a>
                                 </button>
                             {% endif %}
-                            <i class="count-likes">Likes: 0</i>
+                            <i class="count-likes">Likes: {{ p.likes.count }}</i>
                         </div>
                         <div class="underline"></div>
                     </div>
