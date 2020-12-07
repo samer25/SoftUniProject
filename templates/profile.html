@@ -13,16 +13,16 @@
         <div class="content">
             <div class="profile">
 
-                <h1>{{ user.profile.first_name }} {{ user.profile.last_name }}</h1>
+                <h1>{{ user_profile.profile.first_name }} {{ user_profile.profile.last_name }}</h1>
 
-                <img class="profile-pic" src="{{ user.profile.profile_pic.url }}"
+                <img class="profile-pic" src="{{ user_profile.profile.profile_pic.url }}"
                      alt="profile image">
                 <br>
                 <h3>Bio:</h3>
 
-                <p class="bio">{{ user.profile.bio }}</p>
+                <p class="bio">{{ user_profile.profile.bio }}</p>
 
-                {% if user.id == pk %}
+                {% if user_profile.id == pk %}
                     <button class="button-success"><a href="{% url 'edit profile' pk %}"> Edit</a></button>
                     <button class="button-error"><a href="{% url 'delete profile' pk %}"> Delete</a></button>
                 {% endif %}
@@ -31,7 +31,7 @@
             <div class="user_posts">
 
                 <div class="column middle">
-                    {% if user.id == pk %}
+                    {% if user_profile.id == pk %}
                         <h2>My Posts:</h2>
                     {% else %}
                         {% for created in posts|slice:'1' %}

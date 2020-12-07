@@ -18,6 +18,8 @@
 .posts {
     margin-top: 50px;
     background-color: ghostwhite;
+    box-shadow: 5px 5px 15px #000300;
+
 }
 
 .like-level1, .dislike-level1, .share, .comment {
@@ -107,6 +109,9 @@
 
 }
 
+.d {
+    width: 10px;
+}
 
 .extra_content {
     display: none;

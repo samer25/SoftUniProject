@@ -12,4 +12,4 @@ class Post(models.Model):
     description = models.TextField(max_length=100)
     img_post = models.ImageField(upload_to='image_posts')
     date = models.DateField(default=timezone.now)
-
+    likes = models.ManyToManyField(User, related_name='like_post')
