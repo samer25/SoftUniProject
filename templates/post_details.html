@@ -60,6 +60,7 @@
                         <h2>Comment:</h2>
                         <form method="post">
                             {% csrf_token %}
+                            {{ form.errors }}
                             {{ form.comments }}
                             <br>
                             <button class="button-success button-comment">Comment
@@ -71,6 +72,7 @@
                         <h2>Comments:</h2>
                         <br>
                         {% for comm in comments %}
+                            <p>{{ comm.user_comm.profile.first_name }} {{ comm.user_comm.profile.last_name }}</p>
                             <p> {{ comm.comments }}</p>
                             <br>
                         {% endfor %}

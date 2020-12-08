@@ -71,9 +71,11 @@ class PostDetails(DetailView):
         form = CommentPostForm(request.POST)
         context = {'p': post, 'user_profile': user, 'form': form, 'comments': comments}
         if form.is_valid():
-            comm = CommentPostModel(comments=form.cleaned_data['comments'], post_id=kwargs['pk'])
+            comm = CommentPostModel(comments=form.cleaned_data['comments'], post_id=kwargs['pk'],
+                                    user_comm_id=request.user.id)
             comm.post = post
             comm.save()
+
             return redirect('post detail', kwargs['pk'])
         return render(request, 'post_details.html',
                       context)

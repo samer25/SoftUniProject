@@ -22,4 +22,4 @@ class CommentPostForm(forms.ModelForm):
 
     class Meta:
         model = CommentPostModel
-        exclude = ['post', 'date']
+        exclude = ['post', 'date', 'user_comm']
