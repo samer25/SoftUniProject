@@ -7,7 +7,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.urls import reverse_lazy, reverse
 from django.views.generic import DetailView, UpdateView, FormView, CreateView, View, DeleteView
 
-from posts.models import Post
+from posts.models import Post, CommentPostModel
 from user.forms import RegisterUserForm, ProfileUserForm, LoginUserForm
 from user.models import ProfileUser
 
@@ -118,8 +118,10 @@ class ProfileView(DetailView):
 
     def get(self, request, *args, **kwargs):
         user = User.objects.get(pk=kwargs['pk'])
-        post = Post.objects.filter(created_by=self.kwargs['pk'])
-        return render(request, 'profile.html', {'posts': post, 'pk': user.profile.pk, 'user_profile': user})
+        posts = Post.objects.filter(created_by=kwargs['pk'])
+
+        return render(request, 'profile.html',
+                      {'posts': posts, 'pk': user.profile.pk, 'user_profile': user})
 
 
 class EditProfile(UpdateView):

@@ -4,8 +4,8 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
 
-from posts.forms import PostForm
-from posts.models import Post
+from posts.forms import PostForm, CommentPostForm
+from posts.models import Post, CommentPostModel
 from user.models import ProfileUser
 
 
@@ -29,28 +29,6 @@ class CreatePost(CreateView):
         return render(request, 'create_posts.html', {'form': form})
 
 
-# def creating_post(request, pk):
-#     user = User.objects.get(pk=pk)
-#     if request.method == 'GET':
-#         form = PostForm()
-#         return render(request, 'create_posts.html', {'form': form})
-#     else:
-#         form = PostForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             forms = form.save(commit=False)
-#             forms.created_by = user
-#             forms.save()
-#             return redirect('posts')
-#         return render(request, 'create_posts.html', {'form': form})
-
-
-# def posts(request):
-
-
-# post = Post.objects.all()
-# profile = ProfileUser.objects.get()
-# return render(request, 'index.html', {'posts': post, 'profile': profile})
-
 def like_post(request, pk):
     post = Post.objects.get(pk=pk)
     user = User.objects.get(pk=post.created_by.id)
@@ -73,7 +51,32 @@ class PostsView(ListView):
     model = Post
     context_object_name = 'posts'
     template_name = 'index.html'
-    ordering = ['-title']
+    ordering = ['-date']
+
+
+class PostDetails(DetailView):
+    def get(self, request, *args, **kwargs):
+        post = Post.objects.get(pk=kwargs['pk'])
+        user = User.objects.get(pk=post.created_by.pk)
+        form = CommentPostForm()
+        comments = CommentPostModel.objects.filter(post=kwargs['pk'])
+        context = {'p': post, 'user_profile': user, 'form': form, 'comments': comments}
+        return render(request, 'post_details.html', context)
+
+    def post(self, request, *args, **kwargs):
+        post = Post.objects.get(pk=kwargs['pk'])
+        user = User.objects.get(pk=post.created_by.pk)
+        comments = CommentPostModel.objects.filter(post=kwargs['pk'])
+
+        form = CommentPostForm(request.POST)
+        context = {'p': post, 'user_profile': user, 'form': form, 'comments': comments}
+        if form.is_valid():
+            comm = CommentPostModel(comments=form.cleaned_data['comments'], post_id=kwargs['pk'])
+            comm.post = post
+            comm.save()
+            return redirect('post detail', kwargs['pk'])
+        return render(request, 'post_details.html',
+                      context)
 
 
 class PostEdit(UpdateView):

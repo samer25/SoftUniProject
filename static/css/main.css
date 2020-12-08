@@ -20,7 +20,8 @@
 }
 
 .button-success {
-    background-color: #94fbab
+    background-color: #94fbab;
+
 }
 
 .button-success:hover, .button-error:hover {

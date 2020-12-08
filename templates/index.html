@@ -1,7 +1,8 @@
 {% extends 'common/site.html' %}
 {% load static %}
 {% block style %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/posts.css' %}"> {% endblock %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/posts.css' %}">
+{% endblock %}
 {% block title %} Home Page {% endblock %}
 {% block site_content %}
     <div class="root">
@@ -44,16 +45,24 @@
                         <div class="bottom-post">
                             <a href="{% url 'like post' p.id %}" class="fi-like like-level1"></a>
                             <a href="{% url 'dislike post' p.id %}" class="fi-dislike dislike-level1"></a>
-                            <i class="fi-comment-quotes comment"></i>
-                            {#                            <i class="fi-share share"></i>#}
+                            <a href="{% url 'post detail' p.pk %}" class="fi-comment-quotes comment"></a>
                             {% if user.id == p.created_by.pk %}
-                                <button class="button-success"><a href="{% url 'post edit' p.pk %}"> Edit</a>
-                                </button>
-                                <button class="button-error"><a href="{% url 'post delete' p.pk %}"> Delete</a>
-                                </button>
+                                <div class="buttons-align">
+                                    <button class="button-success"><a href="{% url 'post edit' p.pk %}"> Edit</a>
+                                    </button>
+                                    <button class="button-error"><a href="{% url 'post delete' p.pk %}"> Delete</a>
+                                    </button>
+                                </div>
                             {% endif %}
                             <i class="count-likes">Likes: {{ p.likes.count }}</i>
+                            <br>
+                            <div class="buttons-align">
+                                <button class="button-success">
+                                    <a href="{% url 'post detail' p.pk %}"> Details</a>
+                                </button>
+                            </div>
                         </div>
+                        <br>
                         <div class="underline"></div>
                     </div>
 
