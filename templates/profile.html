@@ -68,17 +68,26 @@
                             <div class="bottom-post">
                                 <a href="" class="fi-like like-level1"></a>
                                 <i class="fi-dislike dislike-level1"></i>
-                                <i class="fi-comment-quotes comment"></i>
+                                <a href="{% url 'post detail' post.pk %}" class="fi-comment-quotes comment"></a>
                                 {#                                <i class="fi-share share"></i>#}
 
-                                {% if user.id == pk %}
-                                    <button class="button-success"><a href="{% url 'post edit' post.pk %}"> Edit</a>
-                                    </button>
-                                    <button class="button-error"><a href="{% url 'post delete' post.pk %}"> Delete</a>
-                                    </button>
+                                {% if user.id == post.created_by.id %}
+                                    <div class="buttons-align">
+                                        <button class="button-success"><a href="{% url 'post edit' post.pk %}"> Edit</a>
+                                        </button>
+                                        <button class="button-error"><a href="{% url 'post delete' post.pk %}">
+                                            Delete</a>
+                                        </button>
+                                    </div>
                                 {% endif %}
-                                <i class="count-likes">Likes: 0</i>
+                                <i class="count-likes">Likes: {{ post.likes.count }}</i>
+                                <br>
+                                <div class="buttons-align">
+                                    <button class="button-success"><a
+                                            href="{% url 'post detail' post.pk %}"> Details</a></button>
+                                </div>
                             </div>
+                            <br>
                             <div class="underline"></div>
 
                         </div>

@@ -2,7 +2,57 @@
 .middle {
     width: 50%;
     margin: auto;
+}
 
+.post-details {
+    width: 80%;
+    padding: 0 0 50px 0;
+
+    margin: auto;
+}
+
+.title {
+    text-align: center;
+}
+
+.comments_text_area {
+    width: 80%;
+    margin: auto;
+    display: flex;
+
+    height: 60px;
+    padding: 5px;
+}
+
+.form_comment {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    display: grid;
+}
+
+.all-comments {
+    display: grid;
+}
+
+.all-comments h2, .form_comment h2 {
+    margin: 20px auto;
+}
+
+.all-comments p {
+    margin: auto;
+}
+
+.button-comment {
+    display: flex;
+    margin: auto;
+
+}
+
+.buttons-align {
+    margin: auto;
+    width: 50%;
+    text-align-last: center;
 }
 
 .top-post, .bottom-post {
@@ -21,6 +71,7 @@
     box-shadow: 5px 5px 15px #000300;
 
 }
+
 
 .like-level1, .dislike-level1, .share, .comment {
     font-size: 4vh;
@@ -141,3 +192,5 @@
 .show {
     background-color: black;
 }
+
+
