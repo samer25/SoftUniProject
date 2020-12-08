@@ -121,7 +121,7 @@ class ProfileView(DetailView):
         posts = Post.objects.filter(created_by=kwargs['pk'])
 
         return render(request, 'profile.html',
-                      {'posts': posts, 'pk': user.profile.pk, 'user_profile': user})
+                      {'posts': posts, 'pk': request.user.id, 'user_profile': user})
 
 
 class EditProfile(UpdateView):

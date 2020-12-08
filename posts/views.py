@@ -6,7 +6,6 @@ from django.views.generic import DetailView, ListView, CreateView, UpdateView, D
 
 from posts.forms import PostForm, CommentPostForm
 from posts.models import Post, CommentPostModel
-from user.models import ProfileUser
 
 
 class CreatePost(CreateView):
@@ -31,7 +30,7 @@ class CreatePost(CreateView):
 
 def like_post(request, pk):
     post = Post.objects.get(pk=pk)
-    user = User.objects.get(pk=post.created_by.id)
+    user = User.objects.get(pk=request.user.id)
     post.likes.add(user)
     post.save()
 
@@ -40,7 +39,7 @@ def like_post(request, pk):
 
 def dislike_post(request, pk):
     post = Post.objects.get(pk=pk)
-    user = User.objects.get(pk=post.created_by.id)
+    user = User.objects.get(pk=request.user.id)
     post.likes.remove(user)
     post.save()
     return redirect('posts')
@@ -67,7 +66,6 @@ class PostDetails(DetailView):
         post = Post.objects.get(pk=kwargs['pk'])
         user = User.objects.get(pk=post.created_by.pk)
         comments = CommentPostModel.objects.filter(post=kwargs['pk'])
-
         form = CommentPostForm(request.POST)
         context = {'p': post, 'user_profile': user, 'form': form, 'comments': comments}
         if form.is_valid():
