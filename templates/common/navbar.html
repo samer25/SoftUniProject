@@ -6,10 +6,19 @@
         </div>
         <ul class="nav-links">
             {% if user.is_authenticated %}
-                <li>
-                    <a href="{% url 'profile' user.id %}"> <img src="{{ user.profile.profile_pic.url }}"
-                                                                class="profile-img" alt="profile-img"></a>
-                </li>
+
+                {% if user.is_superuser %}
+                    <li>
+                        ADMIN
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="{% url 'profile' user.id %}"> <img src="{{ user.profile.profile_pic.url }}"
+                                                                    class="profile-img" alt="profile-img"></a>
+                    </li>
+                {% endif %}
+
+
             {% endif %}
             <li>
                 <a href="{% url 'landing page' %}" class="fi-home"></a>
