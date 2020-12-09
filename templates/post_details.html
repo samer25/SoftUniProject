@@ -16,7 +16,7 @@
 
                     <div class="posted-text">
 
-                        <h5 class="time-posted">{{ p.date }}</h5>
+                        <h5 class="time-posted">Date posted: {{ p.date }}</h5>
                         {% if user.is_authenticated %}
                             <a href="{% url 'profile' p.created_by.pk %}">
                         {% else %}
@@ -31,7 +31,7 @@
                         <p class="title"> {{ p.title }} </p>
                         <br>
                         <br>
-                        <h5 class="d">Description:</h5>
+                        <h5 class="description">Description:</h5>
                         <br>
                         <p class="text"> {{ p.description }} </p>
                     </div>
@@ -72,8 +72,12 @@
                         <h2>Comments:</h2>
                         <br>
                         {% for comm in comments %}
-                            <p>{{ comm.user_comm.profile.first_name }} {{ comm.user_comm.profile.last_name }}</p>
-                            <p> {{ comm.comments }}</p>
+                            <div class="comment_box">
+                                <p>{{ comm.date }}</p>
+                                <p>{{ comm.user_comm.profile.first_name }} {{ comm.user_comm.profile.last_name }}</p>
+                                <p> {{ comm.comments }}</p>
+                                <p> {{ comm.comments }}</p>
+                            </div>
                             <br>
                         {% endfor %}
                     </div>
