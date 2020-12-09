@@ -67,7 +67,7 @@ class PostDetails(DetailView):
         user = User.objects.get(pk=post.created_by.pk)
         comments = CommentPostModel.objects.filter(post=kwargs['pk'])
         form = CommentPostForm(request.POST)
-        context = {'p': post, 'user_profile': user, 'form': form, 'comments': comments}
+        context = {'posts': post, 'user_profile': user, 'form': form, 'comments': comments}
         if form.is_valid():
             comm = CommentPostModel(comments=form.cleaned_data['comments'], post_id=kwargs['pk'],
                                     user_comm_id=request.user.id)
