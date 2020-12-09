@@ -23,4 +23,5 @@ urlpatterns = [
                   path('user/', include('user.urls')),
                   path('posts/', include('posts.urls')),
                   path('', include('common.urls')),
+                  path('api/', include('AdminControlSerializers.urls'))
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

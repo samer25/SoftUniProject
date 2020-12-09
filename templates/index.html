@@ -30,7 +30,7 @@
                                 </a>
                                 <h5 class="user">{{ p.created_by.username }}:</h5>
                                 <p class="title"> {{ p.title }} </p>
-                                <h5 class="d">Description:</h5>
+                                <h5 class="description">Description:</h5>
                                 <p class="less-{{ p.id }} less"> {{ p.description|safe|truncatewords:5 }} </p>
 
                                 <p class="extra_content-{{ p.id }} extra_content">{{ p.description }}</p>

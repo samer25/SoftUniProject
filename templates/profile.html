@@ -54,6 +54,7 @@
                                          alt="profile-img">
 
                                     <h5 class="user">{{ post.created_by.username }}:</h5>
+                                    <p class="title"> {{ post.title }} </p>
                                     <p class="less-{{ post.id }} less"> {{ post.description|safe|truncatewords:5 }} </p>
                                     <p class="extra_content-{{ post.id }} extra_content">{{ post.description }}</p>
                                     <button onclick="changeClass('{{ post.id }}')"
