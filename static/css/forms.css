@@ -53,7 +53,8 @@ h2 {
 }
 
 .textarea {
-    padding: 25px;
+    padding: 5px;
+    height: 100%;
     border-radius: 5px;
     border-color: #ff0a3f;
 }

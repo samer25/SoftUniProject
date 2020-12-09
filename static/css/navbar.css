@@ -27,6 +27,8 @@ nav {
 .nav-links li {
     list-style: none;
     cursor: pointer;
+    margin: auto;
+
 }
 
 .nav-links .profile-img {
