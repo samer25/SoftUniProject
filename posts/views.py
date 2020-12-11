@@ -1,17 +1,16 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
-
-# Create your views here.
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
-
 from posts.forms import PostForm, CommentPostForm
 from posts.models import Post, CommentPostModel
 
+"""CRUD FOR POSTS"""
+
 
 class CreatePost(CreateView):
-    """User Creating posts view"""
+    """User Creating posts view that required to be login using method_decorator"""
 
     # get method viewing forms for creating posts
     @method_decorator(login_required(login_url='login user'))
@@ -32,6 +31,7 @@ class CreatePost(CreateView):
         return render(request, 'create_posts.html', {'form': form})
 
 
+# function view for like without render
 @login_required(login_url='login user')
 def like_post(request, pk):
     post = Post.objects.get(pk=pk)
@@ -42,6 +42,7 @@ def like_post(request, pk):
     return redirect('posts')
 
 
+# function view for dislike without render
 @login_required(login_url='login user')
 def dislike_post(request, pk):
     post = Post.objects.get(pk=pk)
@@ -52,7 +53,7 @@ def dislike_post(request, pk):
 
 
 class PostsView(ListView):
-    """viewing all posts from users"""
+    """Viewing all posts from users and is public"""
     model = Post
     context_object_name = 'posts'
     template_name = 'index.html'
@@ -60,7 +61,9 @@ class PostsView(ListView):
 
 
 class PostDetails(DetailView):
+    """Post details and Comments that require user login"""
 
+    # get method viewing post details
     @method_decorator(login_required(login_url='login user'))
     def get(self, request, *args, **kwargs):
         post = Post.objects.get(pk=kwargs['pk'])
@@ -70,6 +73,7 @@ class PostDetails(DetailView):
         context = {'p': post, 'user_profile': user, 'form': form, 'comments': comments}
         return render(request, 'post_details.html', context)
 
+    # post method verified forms fields if they valid if they are save it
     def post(self, request, *args, **kwargs):
         post = Post.objects.get(pk=kwargs['pk'])
         user = User.objects.get(pk=post.created_by.pk)
@@ -88,12 +92,15 @@ class PostDetails(DetailView):
 
 
 class PostEdit(UpdateView):
+    """Post editing """
+
     @method_decorator(login_required(login_url='login user'))
     def get(self, request, *args, **kwargs):
         posts = Post.objects.get(pk=kwargs['pk'])
         form = PostForm(instance=posts)
         return render(request, 'common/edit.html', {'form': form})
 
+    # post method verified forms fields if they valid if they are Update it
     def post(self, request, *args, **kwargs):
         post = Post.objects.get(pk=kwargs['pk'])
         form = PostForm(request.POST, request.FILES, instance=post)
@@ -103,6 +110,8 @@ class PostEdit(UpdateView):
 
 
 class PostDelete(DeleteView):
+    """Post Delete"""
+
     @method_decorator(login_required(login_url='login user'))
     def get(self, request, *args, **kwargs):
         return render(request, 'post_delete.html')

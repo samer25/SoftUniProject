@@ -6,6 +6,7 @@ from django.utils import timezone
 
 
 class Post(models.Model):
+    """Post model with foreign key that can we know how is created the post"""
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_by')
     title = models.CharField(max_length=30)
     description = models.TextField(max_length=100)
@@ -18,6 +19,7 @@ class Post(models.Model):
 
 
 class CommentPostModel(models.Model):
+    """Comment Model with two foreign keys Post and user that can we know what post is comment and how is comment"""
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='post_in')
     user_comm = models.ForeignKey(User, related_name='user_comment', on_delete=models.CASCADE)
     comments = models.TextField(max_length=100)

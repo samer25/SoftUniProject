@@ -20,7 +20,7 @@ class RegisterUser(CreateView):
         profile_form = ProfileUserForm()
         return render(request, 'register.html', {'form': user_form, 'profile_form': profile_form, })
 
-    # post method to verified fields if they are correctly if it is register the user
+    # post method to verified fields if they are correctly if it is register the user with profile
     def post(self, request, *args, **kwargs):
         user_form = RegisterUserForm(request.POST)
         profile_form = ProfileUserForm(request.POST, request.FILES)
