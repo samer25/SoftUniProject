@@ -15,6 +15,11 @@
     text-align: center;
 }
 
+.comments {
+    padding: 5px;
+    box-shadow: 0 0 10px 2px #94fbab;
+}
+
 .comments_text_area {
     width: 80%;
     margin: auto;
@@ -56,6 +61,25 @@
     margin: auto;
     width: 50%;
     text-align-last: center;
+    display: flex;
+}
+
+.edit-button {
+    margin: auto 0 0 auto;
+    display: flex;
+
+}
+
+.delete-button {
+    margin: auto auto 0 0;
+    display: flex;
+
+}
+
+.details-button {
+    display: flex;
+    margin: auto;
+
 }
 
 .top-post, .bottom-post {
@@ -71,7 +95,7 @@
 .posts {
     margin-top: 50px;
     background-color: ghostwhite;
-    box-shadow: 5px 5px 15px #000300;
+    box-shadow: 0 0 10px 2px #94fbab;
 
 }
 
@@ -144,9 +168,8 @@
 }
 
 .posted-text {
-    margin-left: 5px;
-    margin-top: 5px;
-    max-width: 100%;
+    padding: 7px;
+
 
 }
 
@@ -189,7 +212,7 @@
 }
 
 .user {
-    width: 52px;
+    /*width: 52px;*/
 
 }
 
@@ -200,5 +223,18 @@
 .comment_box {
     width: 80%;
     display: contents;
+
+}
+
+.title-box {
+    width: 50%;
+    margin: auto;
+    padding: 25px;
+}
+
+.created_by {
+    padding: 5px;
+    font-size: 2vh;
+    float: left;
 
 }

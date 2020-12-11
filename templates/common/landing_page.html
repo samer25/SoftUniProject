@@ -1,40 +1,57 @@
 {% extends 'common/site.html' %}
+{% load static %}
+{% block style %}
+    <link href="{% static 'css/landing_page.css' %}" type="text/css" rel="stylesheet"> {% endblock %}
 {% block title %} Home Page {% endblock %}
 {% block site_content %}
     <div class="root">
         <div class="content">
-            {% if user.is_authenticated %}
-                <h1>Hello {{ user.profile.first_name }} {{ user.profile.last_name }}!</h1>
-                {% if user.is_superuser %}
+            <div class="landing-box">
+                {% if user.is_authenticated %}
+                    <h1>Hello {{ user.profile.first_name }} {{ user.profile.last_name }}!</h1>
                     <br>
-                    <h1>ADMIN</h1>
+                    {% if user.is_superuser %}
+                        <br>
+                        <h1>ADMIN</h1>
+                        <br>
+                    {% else %}
+                        <img class="profile-pic" src="{{ user.profile.profile_pic.url }}" alt="profile picture">
+                    {% endif %}
                     <br>
+                    <br>
+                    <h1>Welcome to Laugh Center</h1>
                 {% else %}
-                    <img class="profile-pic" src="{{ user.profile.profile_pic.url }}" alt="profile picture">
+                    <h1>Join Laugh Center</h1>
                 {% endif %}
-                <h1>Welcome to Laugh Center</h1>
-            {% else %}
-                <h1>Join Laugh Center</h1>
-            {% endif %}
-            <br>
-            <p>Have fun with others users while creating most funniest posts and comments.</p>
-            <br>
+                <br>
+                <br>
+                <p>Have fun with others users while creating most funniest posts and comments.</p>
+                <br>
+                <br>
+                <h3>Have fun!</h3>
+                <br>
+                <div class="landing-buttons">
 
-            <h3>Have fun!</h3>
-            <br>
-            {% if user.is_authenticated %}
-                <div class="">
-                    <a class="button-success" href="{% url 'create post' user.id %}">Create a post</a>
-                    <span>or</span>
-                    <a class="button-success" href="{% url 'posts' %}">Check all posts</a>
+                    {% if user.is_authenticated %}
+                        <div class="first-button">
+                            <a class="button-success" href="{% url 'create post' user.id %}">Create a post</a>
+                        </div>
+                        <span style="padding: 10px">or</span>
+                        <div class="second-button">
+                            <a class="button-success" href="{% url 'posts' %}">Check all posts</a>
+                        </div>
+
+                    {% else %}
+                        <div class="first-button">
+                            <a class="button-success" href="{% url 'user register' %}">Register</a>
+                        </div>
+                        <span style="padding: 10px">or</span>
+                        <div class="second-button">
+                            <a class="button-success" href="{% url 'login user' %}">Log in</a>
+                        </div>
+                    {% endif %}
                 </div>
-            {% else %}
-                <div class="">
-                    <a href="{% url 'user register' %}">Register</a>
-                    <span>or</span>
-                    <a href="{% url 'login user' %}">Log in</a>
-                </div>
-            {% endif %}
+            </div>
         </div>
     </div>
 {% endblock %}

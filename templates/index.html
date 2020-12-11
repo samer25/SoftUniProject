@@ -10,60 +10,61 @@
             <h1>Welcome to Laugh Center!</h1>
 
             <div class="column middle">
-                {% for post in posts %}
-                    <div class="posts">
-                        <div class="top-post">
-
-                            <div class="posted-text">
-
-                                <h5 class="time-posted">{{ post.date }}</h5>
-                                <img src="{{ post.created_by.profile.profile_pic.url }}" class="profile-img"
-                                     alt="profile-img">
-
-                                <h5 class="user">{{ post.created_by.username }}:</h5>
-                                <p class="title"> {{ post.title }} </p>
-                                <p class="less-{{ post.id }} less"> {{ post.description|safe|truncatewords:5 }} </p>
-                                <p class="extra_content-{{ post.id }} extra_content">{{ post.description }}</p>
-                                <button onclick="changeClass('{{ post.id }}')"
-                                        class="read_more-{{ post.id }} read_more button"><i
-                                        class="fi-arrow-down"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="post-img">
-                            <img src="{{ post.img_post.url }}" alt="post img">
-                        </div>
-                        <div class="bottom-post">
-                            <a href="" class="fi-like like-level1"></a>
-                            <i class="fi-dislike dislike-level1"></i>
-                            <a href="{% url 'post detail' post.pk %}" class="fi-comment-quotes comment"></a>
+                {% include 'common/posts.html' %}
+{#                {% for post in posts %}#}
+{#                    <div class="posts">#}
+{#                        <div class="top-post">#}
+{##}
+{#                            <div class="posted-text">#}
+{##}
+{#                                <h5 class="time-posted">{{ post.date }}</h5>#}
+{#                                <img src="{{ post.created_by.profile.profile_pic.url }}" class="profile-img"#}
+{#                                     alt="profile-img">#}
+{##}
+{#                                <h5 class="user">{{ post.created_by.username }}:</h5>#}
+{#                                <p class="title"> {{ post.title }} </p>#}
+{#                                <p class="less-{{ post.id }} less"> {{ post.description|safe|truncatewords:5 }} </p>#}
+{#                                <p class="extra_content-{{ post.id }} extra_content">{{ post.description }}</p>#}
+{#                                <button onclick="changeClass('{{ post.id }}')"#}
+{#                                        class="read_more-{{ post.id }} read_more button"><i#}
+{#                                        class="fi-arrow-down"></i>#}
+{#                                </button>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="post-img">#}
+{#                            <img src="{{ post.img_post.url }}" alt="post img">#}
+{#                        </div>#}
+{#                        <div class="bottom-post">#}
+{#                            <a href="" class="fi-like like-level1"></a>#}
+{#                            <i class="fi-dislike dislike-level1"></i>#}
+{#                            <a href="{% url 'post detail' post.pk %}" class="fi-comment-quotes comment"></a>#}
                             {#                                <i class="fi-share share"></i>#}
-
-                            {% if user.id == post.created_by.id %}
-                                <div class="buttons-align">
-                                    <button class="button-success"><a class="button-success"
-                                                                      href="{% url 'post edit' post.pk %}"> Edit</a>
-                                    </button>
-                                    <button class="button-error"><a class="button-error"
-                                                                    href="{% url 'post delete' post.pk %}">
-                                        Delete</a>
-                                    </button>
-                                </div>
-                            {% endif %}
-                            <i class="count-likes">Likes: {{ post.likes.count }}</i>
-                            <br>
-                            <div class="buttons-align">
-                                <button class="button-success">
-                                    <a class="button-success"
-                                       href="{% url 'post detail' post.pk %}"> Details</a>
-                                </button>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="underline"></div>
-
-                    </div>
-                {% endfor %}
+{##}
+{#                            {% if user.id == post.created_by.id %}#}
+{#                                <div class="buttons-align">#}
+{#                                    <button class="button-success"><a class="button-success"#}
+{#                                                                      href="{% url 'post edit' post.pk %}"> Edit</a>#}
+{#                                    </button>#}
+{#                                    <button class="button-error"><a class="button-error"#}
+{#                                                                    href="{% url 'post delete' post.pk %}">#}
+{#                                        Delete</a>#}
+{#                                    </button>#}
+{#                                </div>#}
+{#                            {% endif %}#}
+{#                            <i class="count-likes">Likes: {{ post.likes.count }}</i>#}
+{#                            <br>#}
+{#                            <div class="buttons-align">#}
+{#                                <button class="button-success">#}
+{#                                    <a class="button-success"#}
+{#                                       href="{% url 'post detail' post.pk %}"> Details</a>#}
+{#                                </button>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <br>#}
+{#                        <div class="underline"></div>#}
+{##}
+{#                    </div>#}
+{#                {% endfor %}#}
             </div>
         </div>
     </div>

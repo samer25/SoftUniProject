@@ -1,7 +1,9 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 
 # Create your views here.
+from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
 
 from posts.forms import PostForm, CommentPostForm
@@ -12,11 +14,13 @@ class CreatePost(CreateView):
     """User Creating posts view"""
 
     # get method viewing forms for creating posts
+    @method_decorator(login_required(login_url='login user'))
     def get(self, request, *args, **kwargs):
         form = PostForm()
         return render(request, 'create_posts.html', {'form': form})
 
     # post method verified forms fields if they valid if they are save it
+    @method_decorator(login_required(login_url='login user'))
     def post(self, request, *args, **kwargs):
         user = User.objects.get(pk=kwargs['pk'])
         form = PostForm(request.POST, request.FILES)
@@ -28,6 +32,7 @@ class CreatePost(CreateView):
         return render(request, 'create_posts.html', {'form': form})
 
 
+@login_required(login_url='login user')
 def like_post(request, pk):
     post = Post.objects.get(pk=pk)
     user = User.objects.get(pk=request.user.id)
@@ -37,6 +42,7 @@ def like_post(request, pk):
     return redirect('posts')
 
 
+@login_required(login_url='login user')
 def dislike_post(request, pk):
     post = Post.objects.get(pk=pk)
     user = User.objects.get(pk=request.user.id)
@@ -54,6 +60,8 @@ class PostsView(ListView):
 
 
 class PostDetails(DetailView):
+
+    @method_decorator(login_required(login_url='login user'))
     def get(self, request, *args, **kwargs):
         post = Post.objects.get(pk=kwargs['pk'])
         user = User.objects.get(pk=post.created_by.pk)
@@ -80,6 +88,7 @@ class PostDetails(DetailView):
 
 
 class PostEdit(UpdateView):
+    @method_decorator(login_required(login_url='login user'))
     def get(self, request, *args, **kwargs):
         posts = Post.objects.get(pk=kwargs['pk'])
         form = PostForm(instance=posts)
@@ -94,6 +103,7 @@ class PostEdit(UpdateView):
 
 
 class PostDelete(DeleteView):
+    @method_decorator(login_required(login_url='login user'))
     def get(self, request, *args, **kwargs):
         return render(request, 'post_delete.html')
 

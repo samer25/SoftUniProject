@@ -23,12 +23,17 @@
                 <p class="bio">{{ user_profile.profile.bio }}</p>
 
                 {% if user_profile.id == pk %}
-                    <button class="button-success">
-                        <a class="button-success" href="{% url 'edit profile' pk %}">
-                            Edit</a></button>
-                    <button class="button-error">
-                        <a class="button-error" href="{% url 'delete profile' pk %}">
-                            Delete</a></button>
+                    <div class="buttons-align">
+                        <br>
+                        <div class="edit-button">
+                            <a class="button-success" href="{% url 'edit profile' pk %}">
+                                Edit</a>
+                        </div>
+                        <div class="delete-button">
+                            <a class="button-error" href="{% url 'delete profile' pk %}">
+                                Delete</a>
+                        </div>
+                    </div>
                 {% endif %}
             </div>
             <div class="underline"></div>

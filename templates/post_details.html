@@ -15,25 +15,32 @@
                     </div>
 
                     <div class="posted-text">
+                        <div class="date">
 
-                        <h5 class="time-posted">Date posted: {{ p.date }}</h5>
-                        {% if user.is_authenticated %}
+                            <h5 class="time-posted">Date posted: {{ p.date }}</h5>
+                        </div>
+                        <div class="profile-img-box">
+
                             <a href="{% url 'profile' p.created_by.pk %}">
-                        {% else %}
-                            <a href="{% url 'user register' %}">
-                        {% endif %}
-                        <img src="{{ p.created_by.profile.profile_pic.url }}" class="profile-img"
-                             alt="profile-img">
-                        </a>
-                        <h5 class="user">{{ p.created_by.username }}:</h5>
-                        <p class="title">Tittle:</p>
-                        <br>
-                        <p class="title"> {{ p.title }} </p>
-                        <br>
-                        <br>
-                        <h5 class="description">Description:</h5>
-                        <br>
-                        <p class="text"> {{ p.description }} </p>
+                                <img src="{{ p.created_by.profile.profile_pic.url }}" class="profile-img"
+                                     alt="profile-img">
+                            </a>
+                        </div>
+                        <div class="created_by">
+                            <h5 class="user">{{ p.created_by.username }}</h5>
+                        </div>
+                        <div class="title-box">
+
+                            <p class="title">Tittle:</p>
+                            <br>
+                            <p class="title"> {{ p.title }} </p>
+                        </div>
+
+                        <div class="description">
+                            <h5 class="description">Description:</h5>
+                            <br>
+                            <p class="text"> {{ p.description }} </p>
+                        </div>
                     </div>
                 </div>
                 <div class="post-img">
@@ -42,16 +49,18 @@
                 <div class="bottom-post">
                     <a href="{% url 'like post' p.id %}" class="fi-like like-level1"></a>
                     <a href="{% url 'dislike post' p.id %}" class="fi-dislike dislike-level1"></a>
-                    {% if user.id == p.created_by.pk %}
-                        <div class=buttons-align>
-                            <button class="button-success"><a href="{% url 'post edit' p.pk %}"> Edit</a>
-                            </button>
-                            <button class="button-error"><a href="{% url 'post delete' p.pk %}"> Delete</a>
-                            </button>
-                        </div>
-                    {% endif %}
                     <i class="count-likes">Likes: {{ p.likes.count }}</i>
                     <i class="count-likes">Comments: {{ comments|length }}</i>
+                    {% if user.id == p.created_by.pk %}
+                        <br>
+                        <br>
+                        <div class=buttons-align>
+                            <a class="button-success" href="{% url 'post edit' p.pk %}"> Edit</a>
+
+                            <a class="button-error" href="{% url 'post delete' p.pk %}"> Delete</a>
+                        </div>
+                    {% endif %}
+
                     <br>
                     <br>
                     <div class="underline" style="margin-top: 50px"></div>
@@ -63,26 +72,42 @@
                             {{ form.errors }}
                             {{ form.comments }}
                             <br>
-                            <button class="button-success button-comment">Comment
+                            <button class="button-success button button-comment">Comment
                             </button>
 
                         </form>
                     </div>
+                    <br>
                     <div class="all-comments">
                         <h2>Comments:</h2>
                         <br>
+
                         {% for comm in comments %}
-                            <div class="comment_box">
-                                <p>{{ comm.date }}</p>
-                                <p>{{ comm.user_comm.profile.first_name }} {{ comm.user_comm.profile.last_name }}</p>
-                                <p> {{ comm.comments }}</p>
-                                <p> {{ comm.comments }}</p>
+                            <div class="comments">
+                                <div class="date">
+
+                                    <h5 class="time-posted">{{ p.date }}</h5>
+                                </div>
+                                <div class="created_by">
+                                    <h5 class="user">{{ comm.user_comm.profile.first_name }} {{ comm.user_comm.profile.last_name }}</h5>
+                                </div>
+
+
+                                <div class="title-box">
+
+                                    <br>
+                                    <p class="title"> {{ comm.comments }} </p>
+                                </div>
                             </div>
+
+
+                            <div class="underline" style="margin-top: 25px"></div>
                             <br>
+                            <br>
+
                         {% endfor %}
                     </div>
                 </div>
-                <div class="underline" style="margin-top: 50px"></div>
             </div>
 
         </div>
