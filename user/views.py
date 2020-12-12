@@ -42,7 +42,7 @@ class LoginUser(FormView):
         login_form = LoginUserForm()
         return render(request, 'login.html', {'form': login_form})
 
-    # post method verified if the user it is exist if it log in
+    # post method verified user if exist
     def post(self, request, *args, **kwargs):
         login_form = LoginUserForm(request.POST)
         if login_form.is_valid():
@@ -66,7 +66,7 @@ def logout_user(request):
 
 
 class ProfileView(DetailView):
-    """Viewing Profile of the user and his posts"""
+    """Getting selected Profile of the user and his posts"""
 
     @method_decorator(login_required(login_url='login user'))
     def get(self, request, *args, **kwargs):

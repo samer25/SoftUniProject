@@ -53,7 +53,7 @@ def dislike_post(request, pk):
 
 
 class PostsView(ListView):
-    """Viewing all posts from users and is public"""
+    """ all posts from users and is it public"""
     model = Post
     context_object_name = 'posts'
     template_name = 'index.html'
@@ -63,7 +63,7 @@ class PostsView(ListView):
 class PostDetails(DetailView):
     """Post details and Comments that require user login"""
 
-    # get method viewing post details
+    # get method view getting from selected user post details and adding form comment with comments that users comments
     @method_decorator(login_required(login_url='login user'))
     def get(self, request, *args, **kwargs):
         post = Post.objects.get(pk=kwargs['pk'])
@@ -73,7 +73,7 @@ class PostDetails(DetailView):
         context = {'p': post, 'user_profile': user, 'form': form, 'comments': comments}
         return render(request, 'post_details.html', context)
 
-    # post method verified forms fields if they valid if they are save it
+    # post method verified forms comment fields if they valid
     def post(self, request, *args, **kwargs):
         post = Post.objects.get(pk=kwargs['pk'])
         user = User.objects.get(pk=post.created_by.pk)
@@ -94,13 +94,14 @@ class PostDetails(DetailView):
 class PostEdit(UpdateView):
     """Post editing """
 
+    # method get getting forms of selected post to edit it
     @method_decorator(login_required(login_url='login user'))
     def get(self, request, *args, **kwargs):
         posts = Post.objects.get(pk=kwargs['pk'])
         form = PostForm(instance=posts)
         return render(request, 'common/edit.html', {'form': form})
 
-    # post method verified forms fields if they valid if they are Update it
+    # post method verified forms fields if they valid if they are update it
     def post(self, request, *args, **kwargs):
         post = Post.objects.get(pk=kwargs['pk'])
         form = PostForm(request.POST, request.FILES, instance=post)
@@ -111,6 +112,7 @@ class PostEdit(UpdateView):
 
 class PostDelete(DeleteView):
     """Post Delete"""
+    """Deleting the post with all connected models : comments model """
 
     @method_decorator(login_required(login_url='login user'))
     def get(self, request, *args, **kwargs):
