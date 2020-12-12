@@ -8,6 +8,7 @@
 {% block title %}Post Details{% endblock %}
 {% block site_content %}
     <div class="root">
+        <br>
         <div class="post-details">
             <div class="posts">
                 <div class="top-post">
@@ -28,6 +29,8 @@
                         </div>
                         <div class="created_by">
                             <h5 class="user">{{ p.created_by.username }}</h5>
+                            <h5 class="user">{{ p.created_by.profile.first_name }} {{ p.created_by.profile.last_name }}</h5>
+
                         </div>
                         <div class="title-box">
 
@@ -51,7 +54,7 @@
                     <a href="{% url 'dislike post' p.id %}" class="fi-dislike dislike-level1"></a>
                     <i class="count-likes">Likes: {{ p.likes.count }}</i>
                     <i class="count-likes">Comments: {{ comments|length }}</i>
-                    {% if user.id == p.created_by.pk %}
+                    {% if user.id == p.created_by.pk or user.is_superuser %}
                         <br>
                         <br>
                         <div class=buttons-align>

@@ -11,7 +11,7 @@
                          alt="profile-img">
                 </div>
                 <div class="created_by">
-                    <h5 class="user">{{ post.created_by.username }}</h5>
+                    <h5 class="user">{{ post.created_by.profile.first_name }} {{ post.created_by.profile.last_name }}</h5>
                 </div>
                 <div class="title-box">
                     <p class="title"> {{ post.title }} </p>
@@ -40,7 +40,7 @@
             <i class="count-likes">Likes: {{ post.likes.count }}</i>
             <br>
             <br>
-            {% if user.id == post.created_by.id %}
+            {% if user.id == post.created_by.id or user.is_superuser %}
                 <br>
                 <div class="buttons-align">
                     <div class="edit-button">
