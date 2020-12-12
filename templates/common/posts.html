@@ -33,10 +33,10 @@
         <div class="bottom-post">
             <div class="likes-and-comment">
                 <a href="{% url 'like post' post.pk %}" class="fi-like like-level1"></a>
-                <a href="{% url 'dislike post' post.pk %}" class="fi-dislike dislike-level1"></>
-                <a href="{% url 'post detail' post.pk %}" class="fi-comment-quotes comment"></a>
+                <a href="{% url 'dislike post' post.pk %}" class="fi-dislike dislike-level1"></a>
+                <a href="{% url 'post detail' post.pk %}?#all-comments" class="fi-comment-quotes comment"></a>
             </div>
-            {#                                <i class="fi-share share"></i>#}
+
             <i class="count-likes">Likes: {{ post.likes.count }}</i>
             <br>
             <br>
