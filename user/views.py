@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
@@ -30,6 +31,8 @@ class RegisterUser(CreateView):
             profile.user = user
             profile.save()
             login(request, user)
+            messages.success(request, 'Successfully Registered')
+
             return redirect('landing page')
         return render(request, 'register.html', {'form': user_form, 'profile_form': profile_form, })
 
@@ -51,6 +54,7 @@ class LoginUser(FormView):
             user = authenticate(username=username, password=password)
             if user:
                 login(request, user)
+                messages.success(request, 'Successfully Logged in')
                 return redirect('landing page')
             else:
                 error = 'user or password is not valid!'
@@ -62,6 +66,8 @@ class LoginUser(FormView):
 @login_required
 def logout_user(request):
     logout(request)
+    messages.success(request, 'Successfully Logged out')
+
     return redirect('landing page')
 
 
@@ -94,6 +100,8 @@ class EditProfile(UpdateView):
         profile = ProfileUser.objects.get(pk=user.profile.pk)
         form = ProfileUserForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
+            messages.success(request, 'Successfully Edited Your Profile')
+
             form.save()
             return redirect('profile', kwargs['pk'])
 
@@ -110,4 +118,6 @@ class DeleteProfile(DeleteView):
     def post(self, request, *args, **kwargs):
         user = User.objects.get(pk=kwargs['pk'])
         user.delete()
+        messages.success(request, 'Successfully Deleted Your Profile')
+
         return redirect('landing page')
