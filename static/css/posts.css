@@ -59,7 +59,6 @@
 
 .buttons-align {
     margin: auto;
-    width: 50%;
     text-align-last: center;
     display: flex;
 }
@@ -106,6 +105,18 @@
     cursor: pointer;
     float: left;
 
+
+}
+
+@media screen and (max-width: 768px) {
+    .like-level1, .dislike-level1, .share, .comment {
+    font-size: 3vh;
+    margin-left: 2%;
+    cursor: pointer;
+    float: left;
+
+
+}
 
 }
 

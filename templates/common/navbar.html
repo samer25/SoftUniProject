@@ -22,37 +22,37 @@
 
             {% endif %}
             <li>
-                <a href="{% url 'landing page' %}" class="fi-home"></a>
+                <a title="Home" href="{% url 'landing page' %}" class="fi-home"></a>
             </li>
             {% if user.is_authenticated %}
                 <li>
 
-                    <a href="{% url 'create post' user.id %}" class="fi-page-add"></a>
+                    <a title="Creat a post" href="{% url 'create post' user.id %}" class="fi-page-add"></a>
 
                 </li>
             {% endif %}
             <li>
-                <a href="{% url 'posts' %}" class="fi-page-multiple"></a>
+                <a title="All posts" href="{% url 'posts' %}" class="fi-page-multiple"></a>
 
             </li>
             {% if user.is_superuser %}
-                 <li>
+                <li>
 
-                    <a href="{% url 'admin:index' %}" class="fi-wrench"></a>
+                    <a title="Admin page" href="{% url 'admin:index' %}" class="fi-wrench"></a>
 
                 </li>
                 <li>
 
-                    <a href="{% url 'api-root' %}" class="fi-widget"></a>
+                    <a title="Admin serializer" href="{% url 'api-root' %}" class="fi-widget"></a>
 
                 </li>
             {% endif %}
 
             <li>
                 {% if user.is_authenticated %}
-                    <a href="{% url 'logout user' %}" class="fi-arrow-right"></a>
+                    <a title="Log out" href="{% url 'logout user' %}" class="fi-arrow-right"></a>
                 {% else %}
-                    <a href="{% url 'login user' %}" class="fi-arrow-left"></a>
+                    <a title="Log in" href="{% url 'login user' %}" class="fi-arrow-left"></a>
                 {% endif %}
             </li>
 

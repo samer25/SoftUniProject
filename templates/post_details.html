@@ -55,9 +55,12 @@
                         <br>
                         <br>
                         <div class=buttons-align>
-                            <a class="button-success" href="{% url 'post edit' p.pk %}"> Edit</a>
-
-                            <a class="button-error" href="{% url 'post delete' p.pk %}"> Delete</a>
+                            <div class="edit-button">
+                                <a class="button-success" href="{% url 'post edit' p.pk %}"> Edit</a>
+                            </div>
+                            <div class="delete-button">
+                                <a class="button-error" href="{% url 'post delete' p.pk %}"> Delete</a>
+                            </div>
                         </div>
                     {% endif %}
 
