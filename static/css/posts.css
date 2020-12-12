@@ -54,11 +54,12 @@
 .button-comment {
     display: flex;
     margin: auto;
+    width: auto;
 
 }
 
 .buttons-align {
-    margin: auto;
+    margin: 12px auto;
     text-align-last: center;
     display: flex;
 }
@@ -110,13 +111,13 @@
 
 @media screen and (max-width: 768px) {
     .like-level1, .dislike-level1, .share, .comment {
-    font-size: 3vh;
-    margin-left: 2%;
-    cursor: pointer;
-    float: left;
+        font-size: 3vh;
+        margin-left: 2%;
+        cursor: pointer;
+        float: left;
 
 
-}
+    }
 
 }
 
