@@ -1,3 +1,4 @@
+{% load static %}
 {% for post in posts %}
     <div class="posts">
         <div class="top-post">
@@ -17,9 +18,10 @@
                     <p class="title"> {{ post.title }} </p>
                 </div>
                 <div class="description">
-                    <p class="less-{{ post.id }} less"> {{ post.description|safe|truncatewords:5 }} </p>
+                    <p class="less-{{ post.id }} less"> {{ post.description|safe|truncatewords:3 }} </p>
 
                     <p class="extra_content-{{ post.id }} extra_content">{{ post.description }}</p>
+                    <br>
                     <button onclick="changeClass('{{ post.id }}')"
                             class="read_more-{{ post.id }} read_more button"><i
                             class="fi-arrow-down"></i>
@@ -70,4 +72,7 @@
 
     <br>
     <div class="underline"></div>
+    {% block script %}
+        <script src="{% static 'js/posts.js' %}"></script>
+    {% endblock %}
 {% endfor %}
