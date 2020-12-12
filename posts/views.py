@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
@@ -27,6 +28,8 @@ class CreatePost(CreateView):
             forms = form.save(commit=False)
             forms.created_by = user
             forms.save()
+            messages.success(request, 'Successfully Created Post')
+
             return redirect('posts')
         return render(request, 'create_posts.html', {'form': form})
 
@@ -85,6 +88,7 @@ class PostDetails(DetailView):
                                     user_comm_id=request.user.id)
             comm.post = post
             comm.save()
+            messages.success(request, 'Successfully Commented The Post')
 
             return redirect('post detail', kwargs['pk'])
         return render(request, 'post_details.html',
@@ -107,6 +111,7 @@ class PostEdit(UpdateView):
         form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Successfully Edited The Post')
             return redirect('posts')
 
 
@@ -121,4 +126,6 @@ class PostDelete(DeleteView):
     def post(self, request, *args, **kwargs):
         post = Post.objects.get(pk=kwargs['pk'])
         post.delete()
+        messages.success(request, 'Successfully Deleted The Post')
+
         return redirect('posts')

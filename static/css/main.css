@@ -68,6 +68,22 @@
     padding: 20px;
 }
 
+.alert {
+    position: absolute;
+    width: 100%;
+    margin-top: 65px;
+    text-align: center;
+}
+
+.massage-alert {
+    width: 25%;
+    padding: 5px;
+    margin: auto;
+    border-radius: 4px;
+    box-shadow: 0 0 10px 6px #94fbab;
+
+}
+
 @media screen and (max-width: 1024px) {
 
     .button-success,

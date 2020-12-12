@@ -15,10 +15,25 @@
 </head>
 <body>
 {% include 'common/navbar.html' %}
+<div class="alert" role="alert">
+
+    {% if messages %}
+        <div class="massage-alert">
+            {% for message in messages %}
+                {% if message.tags %}
+                    {{ message }}"
+                {% endif %}
+
+            {% endfor %}
+        </div>
+    {% endif %}
+
+</div>
 {% block site_content %}
 
 {% endblock %}
 {% block script %}{% endblock %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src={% static "js/navbar.js" %}></script>
 </body>
 </html>
