@@ -1,3 +1,5 @@
+import os
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -108,8 +110,10 @@ class PostEdit(UpdateView):
     # post method verified forms fields if they valid if they are update it
     def post(self, request, *args, **kwargs):
         post = Post.objects.get(pk=kwargs['pk'])
+        path_img = post.img_post.path
         form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
+            os.remove(path_img)
             form.save()
             messages.success(request, 'Successfully Edited The Post')
             return redirect('posts')
@@ -125,6 +129,7 @@ class PostDelete(DeleteView):
 
     def post(self, request, *args, **kwargs):
         post = Post.objects.get(pk=kwargs['pk'])
+        os.remove(post.img_post.path)
         post.delete()
         messages.success(request, 'Successfully Deleted The Post')
 
